@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 interface ContactEmailData {
   name: string;
   email: string;
@@ -10,6 +8,12 @@ interface ContactEmailData {
 }
 
 export async function sendContactEmail(data: ContactEmailData) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey || apiKey.startsWith("re_your_") || apiKey === "undefined") {
+    // Resend is completely optional (Web3Forms is primary)
+    return { success: false, reason: "No valid RESEND_API_KEY configured" };
+  }
+
   const { name, email, subject, message } = data;
 
   const html = `
@@ -28,16 +32,17 @@ export async function sendContactEmail(data: ContactEmailData) {
   `;
 
   try {
+    const resend = new Resend(apiKey);
     const result = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: process.env.ADMIN_EMAIL || "amrit@example.com",
+      to: process.env.ADMIN_EMAIL || "amritchand0713@gmail.com",
       replyTo: email,
       subject: `[Portfolio] ${subject}`,
       html,
     });
     return { success: true, data: result };
   } catch (error) {
-    console.error("Email send error:", error);
+    console.warn("Email send warning (optional):", error);
     return { success: false, error };
   }
 }
