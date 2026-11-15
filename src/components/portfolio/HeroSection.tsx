@@ -27,11 +27,19 @@ function useCounter(target: number, duration: number, started: boolean) {
 export default function HeroSection() {
   const [mounted, setMounted]                   = useState(false);
   const [countersStarted, setCountersStarted]   = useState(false);
+  const [isMobile, setIsMobile]                 = useState(false);
   const portraitRef = useRef<HTMLDivElement>(null);
 
   const count2 = useCounter(2, 1200, countersStarted);
   const projectTarget = Math.max(PROJECTS.length, 8);
   const countProjects = useCounter(projectTarget, 1500, countersStarted);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -130,28 +138,58 @@ export default function HeroSection() {
 
         /* ── Mobile ────────────────────────────────────────────────────────── */
         @media (max-width: 768px) {
+          #home {
+            min-height: 100svh !important;
+            height: 100svh !important;
+          }
           .orv-panel-stats  { display: none !important; }
           .orv-panel-latest { display: none !important; }
           .orv-panel-avail  { display: none !important; }
           .orv-brandplate   { display: none !important; }
+
+          /* Centered, elevated portrait on mobile */
           .orv-portrait-wrap {
-            width: 100% !important;
-            left: 0 !important;
-            transform: none !important;
-            height: 65svh !important;
-            top: auto !important;
-            bottom: 0 !important;
+            width: clamp(300px, 90vw, 440px) !important;
+            height: clamp(400px, 62svh, 540px) !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            top: 72px !important;
+            bottom: auto !important;
+            mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, #000 48%, rgba(0, 0, 0, 0.9) 62%, transparent 88%) !important;
+            -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, #000 48%, rgba(0, 0, 0, 0.9) 62%, transparent 88%) !important;
           }
-          .orv-heading-block {
-            left: 20px !important;
-            top: 92px !important;
+
+          .orv-portrait-bottom {
+            background: linear-gradient(to top, #030303 0%, rgba(3, 3, 3, 0.7) 35%, transparent 65%) !important;
           }
+
+          /* Velocity text passes right behind the hood on mobile */
+          .orv-velocity-wrap {
+            top: 220px !important;
+          }
+
+          /* Compact, centered about/CTA block at screen bottom */
           .orv-about-block {
-            left: 20px !important;
-            right: 20px !important;
+            left: 16px !important;
+            right: 16px !important;
             bottom: 24px !important;
             top: auto !important;
             max-width: none !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            z-index: 25 !important;
+          }
+
+          .orv-about-block p {
+            font-size: 12px !important;
+            max-width: 320px !important;
+            margin-bottom: 14px !important;
+          }
+
+          .orv-about-block .flex-wrap {
+            justify-content: center !important;
           }
         }
       `}</style>
@@ -161,8 +199,7 @@ export default function HeroSection() {
       ════════════════════════════════════════════════════════════════════ */}
       <section
         id="home"
-        className="relative w-full overflow-hidden sticky top-0 z-10 bg-[#030303]"
-        style={{ minHeight: '938px', height: '100svh' }}
+        className="relative w-full overflow-hidden sticky top-0 z-10 bg-[#030303] h-[100svh] min-h-[600px] md:min-h-[938px]"
         aria-label="Hero"
       >
 
@@ -213,8 +250,8 @@ export default function HeroSection() {
             from behind the central portrait from left to right
         ═══════════════════════════════════════════════════════════════════ */}
         <div
-          className={`absolute z-[5] left-0 right-0 w-full select-none pointer-events-none overflow-hidden ${fadeUp(200)}`}
-          style={{ top: 'clamp(210px, 30vh, 290px)', ...delay(200) }}
+          className={`orv-velocity-wrap absolute z-[5] left-0 right-0 w-full select-none pointer-events-none overflow-hidden ${fadeUp(200)}`}
+          style={{ top: isMobile ? '180px' : 'clamp(210px, 30vh, 290px)', ...delay(200) }}
           aria-hidden="true"
         >
           <ScrollVelocity
@@ -224,7 +261,7 @@ export default function HeroSection() {
             separator="—"
             gap={48}
             fadeEdges={true}
-            fontSize="clamp(64px, 9.5vw, 136px)"
+            fontSize={isMobile ? 'clamp(44px, 12vw, 72px)' : 'clamp(64px, 9.5vw, 136px)'}
             fontWeight={800}
             skewWithVelocity={8}
             className="orv-display uppercase tracking-[-0.04em] text-white/[0.24] drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
@@ -236,7 +273,18 @@ export default function HeroSection() {
         ═══════════════════════════════════════════════════════════════════ */}
         <div
           className={`orv-about-block absolute z-20 ${fadeUp(360)}`}
-          style={{ left: '57px', bottom: '72px', maxWidth: '260px', ...delay(360) }}
+          style={isMobile ? {
+            left: '16px',
+            right: '16px',
+            bottom: '20px',
+            top: 'auto',
+            maxWidth: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+            ...delay(360),
+          } : { left: '57px', bottom: '72px', maxWidth: '260px', ...delay(360) }}
         >
           {/* Availability */}
           <div className="flex items-center gap-2 mb-3">
@@ -285,7 +333,17 @@ export default function HeroSection() {
           className={`orv-portrait-wrap absolute z-10 overflow-hidden pointer-events-none select-none transition-all duration-1000 ease-[cubic-bezier(.22,1,.36,1)] ${
             mounted ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{
+          style={isMobile ? {
+            left: '50%',
+            top: '56px',
+            transform: 'translateX(-50%)',
+            width: '100vw',
+            height: '65svh',
+            bottom: 'auto',
+            transitionDelay: mounted ? '180ms' : '0ms',
+            maskImage: 'radial-gradient(ellipse 55% 62% at 50% 44%, #000 50%, rgba(0,0,0,0.85) 65%, transparent 88%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 55% 62% at 50% 44%, #000 50%, rgba(0,0,0,0.85) 65%, transparent 88%)',
+          } : {
             left: '50%',
             top: '-24px',
             transform: 'translateX(-50%)',
