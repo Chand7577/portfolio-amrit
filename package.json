@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "build:turbopack": "next build",
-    "start": "next start",
+    "start": "next start -p ${PORT:-3000}",
     "lint": "next lint",
     "seed": "tsx scripts/seed.ts"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "@gsap/react": "^2.1.0",

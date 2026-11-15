@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: amrit-chand-portfolio
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+        value: efb7a980-f85e-4c61-be3e-33968a245c72
+      - key: WEB3FORMS_ACCESS_KEY
+        value: efb7a980-f85e-4c61-be3e-33968a245c72
+      - key: NEXTAUTH_SECRET
+        generateValue: true
