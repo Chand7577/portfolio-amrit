@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #030303;
+    color: #fdfdfd;
+  }
+
+  body {
+    background-color: #030303;
+    color: #aaadb0;
+    font-family: Graphik, -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Instrument Serif', Georgia, Cambria, 'Times New Roman', serif;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: #ffffff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  ::selection {
+    background-color: #ffffff;
+    color: #030303;
+  }
+
+  :focus-visible {
+    outline: 1.5px solid #ffffff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Custom Minimalist Clean Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #030303;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+/* React Bits Shiny Text Keyframes */
+@keyframes shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shine {
+  animation: shine 4s linear infinite;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   THEME VIEW TRANSITION & CIRCULAR RIPPLE SPREAD
+══════════════════════════════════════════════════════════════════════════════ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 999999;
+}
+
+html.dark::view-transition-old(root) {
+  z-index: 1;
+}
+
+html.dark::view-transition-new(root) {
+  z-index: 999999;
+}
+
+/* Glowing shockwave expanding pulse from click coordinates */
+@keyframes theme-pulse-expand {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(0.1);
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    width: 280vmax;
+    height: 280vmax;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.theme-shockwave-pulse {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999998;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 30px 6px rgba(255, 255, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2);
+  animation: theme-pulse-expand 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   LIGHT MODE ADAPTATION
+══════════════════════════════════════════════════════════════════════════════ */
+html.light {
+  background-color: #f7f8fa;
+  color: #1a1a1a;
+}
+
+html.light body {
+  background-color: #f7f8fa;
+  color: #374151;
+}
+
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #0c0d0e;
+}
+
+html.light ::selection {
+  background-color: #0c0d0e;
+  color: #ffffff;
+}
+
+/* Background overrides in Light Mode */
+html.light .bg-\[\#030303\] {
+  background-color: #f7f8fa !important;
+}
+
+html.light .bg-\[\#0a0a0a\] {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-\[\#0c0c0d\] {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-\[\#060606\]\/80,
+html.light .bg-\[\#060606\]\/85 {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* Borders */
+html.light .border-\[\#1a1a1a\] {
+  border-color: #e5e7eb !important;
+}
+
+html.light .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Typography in Light Mode */
+html.light .text-\[\#ffffff\] {
+  color: #0c0d0e !important;
+}
+
+html.light .text-\[\#fdfdfd\] {
+  color: #0c0d0e !important;
+}
+
+html.light .text-\[\#aaadb0\] {
+  color: #4b5563 !important;
+}
+
+html.light .text-\[\#9a9a9a\] {
+  color: #6b7280 !important;
+}
+
+html.light .text-\[\#777777\] {
+  color: #9ca3af !important;
+}
+
+html.light .text-white {
+  color: #0c0d0e !important;
+}
+
+html.light .text-white\/\[0\.24\] {
+  color: rgba(0, 0, 0, 0.16) !important;
+}
+
+/* Hero Section Elements in Light Mode */
+html.light .orv-brandplate {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+html.light .orv-brandplate span {
+  color: #0c0d0e !important;
+}
+
+html.light .orv-brandplate svg polygon {
+  stroke: #0c0d0e !important;
+}
+
+html.light .orv-brandplate svg polygon:last-child {
+  fill: #0c0d0e !important;
+}
+
+html.light .orv-portrait-backing {
+  background: radial-gradient(ellipse 42% 48% at 50% 40%, #f7f8fa 55%, transparent 78%) !important;
+}
+
+html.light .orv-portrait-bottom {
+  background: linear-gradient(to top, #f7f8fa 0%, transparent 50%) !important;
+}
+
+html.light .orv-panel-stats > div {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .orv-panel-avail > div {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+html.light .orv-btn {
+  background-color: #0c0d0e !important;
+  color: #ffffff !important;
+}
+
+html.light .orv-btn span {
+  color: #ffffff !important;
+}
+
