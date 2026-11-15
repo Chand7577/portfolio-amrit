@@ -17,8 +17,9 @@
 # misc
 .DS_Store
 *.pem
-unslop/
-cinematic/
+/unslop/
+/cinematic/
+!public/cinematic/
 
 # debug logs
 npm-debug.log*
