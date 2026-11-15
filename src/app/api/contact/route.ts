@@ -40,11 +40,13 @@ export async function POST(req: NextRequest) {
   const { name, email, subject, message } = parsed.data;
 
   try {
-    await connectDB();
-    await ContactModel.create({ name, email, subject, message });
+    const db = await connectDB();
+    if (db) {
+      await ContactModel.create({ name, email, subject, message });
+    }
   } catch (err) {
-    console.error('DB error:', err);
-    // Non-fatal: still try to send email
+    console.warn('DB error (optional):', err);
+    // Non-fatal: still continue with Web3Forms & email
   }
 
   // Send email notification (non-blocking)

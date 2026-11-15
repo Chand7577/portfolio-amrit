@@ -1,17 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import ProjectModel from '@/models/Project';
+import { PROJECTS } from '@/data/portfolioData';
 
 type Context = { params: Promise<{ slug: string }> };
 
 export async function GET(_req: NextRequest, { params }: Context) {
   const { slug } = await params;
   try {
-    await connectDB();
+    const db = await connectDB();
+    if (!db) {
+      const match = PROJECTS.find((p) => p.id === slug);
+      if (!match) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+      return NextResponse.json({ project: match });
+    }
+
     const project = await ProjectModel.findOne({ slug }).lean();
-    if (!project) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    if (!project) {
+      const match = PROJECTS.find((p) => p.id === slug);
+      if (!match) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+      return NextResponse.json({ project: match });
+    }
     return NextResponse.json({ project });
   } catch {
+    const match = PROJECTS.find((p) => p.id === slug);
+    if (match) return NextResponse.json({ project: match });
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }

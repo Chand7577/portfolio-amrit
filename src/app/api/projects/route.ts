@@ -2,11 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import connectDB from '@/lib/mongodb';
 import ProjectModel from '@/models/Project';
+import { PROJECTS } from '@/data/portfolioData';
 
 /* ── GET /api/projects ──────────────────────────────────── */
 export async function GET(req: NextRequest) {
   try {
-    await connectDB();
+    const db = await connectDB();
+    if (!db) {
+      // Fallback to static portfolio projects
+      return NextResponse.json(
+        { projects: PROJECTS },
+        { headers: { 'Cache-Control': 's-maxage=60, stale-while-revalidate=120' } }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
     const featured = searchParams.get('featured');
     const category = searchParams.get('category');
@@ -21,8 +30,8 @@ export async function GET(req: NextRequest) {
       headers: { 'Cache-Control': 's-maxage=60, stale-while-revalidate=120' },
     });
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500 });
+    console.warn('DB error, falling back to static projects:', err);
+    return NextResponse.json({ projects: PROJECTS });
   }
 }
 

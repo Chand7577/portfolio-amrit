@@ -1,13 +1,5 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
-  );
-}
-
 interface MongooseCache {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -21,12 +13,18 @@ declare global {
 const cached: MongooseCache = global._mongoose ?? { conn: null, promise: null };
 global._mongoose = cached;
 
-export async function connectDB() {
+export async function connectDB(): Promise<typeof mongoose | null> {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    // MongoDB is completely optional in this deployment
+    return null;
+  }
+
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
     cached.promise = mongoose
-      .connect(MONGODB_URI, { bufferCommands: false })
+      .connect(uri, { bufferCommands: false })
       .then((m) => m);
   }
 
@@ -34,7 +32,8 @@ export async function connectDB() {
     cached.conn = await cached.promise;
   } catch (e) {
     cached.promise = null;
-    throw e;
+    console.warn("MongoDB connection failed (optional DB):", e);
+    return null;
   }
 
   return cached.conn;
