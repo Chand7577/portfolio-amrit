@@ -12,6 +12,7 @@ import ContactSection from '@/components/portfolio/ContactSection';
 import Footer from '@/components/portfolio/Footer';
 import LenisProvider from '@/components/layout/LenisProvider';
 import SlideUpContent from '@/components/layout/SlideUpContent';
+import Preloader from '@/components/ui/Preloader';
 
 export default function Home() {
   return (
@@ -23,6 +24,9 @@ export default function Home() {
         (at the bottom of the viewport on load), and scrolls up over the pinned hero.
       */}
       <div className="bg-[#030303] text-[#aaadb0] font-body selection:bg-white selection:text-[#030303]">
+
+        {/* Cinematic Enlarged Typewriter Preloader */}
+        <Preloader />
 
         {/* Floating Transparent Navigation */}
         <Navbar />
