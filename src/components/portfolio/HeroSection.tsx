@@ -93,6 +93,12 @@ export default function HeroSection() {
           -webkit-mask-image: radial-gradient(ellipse 48% 54% at 50% 42%, #000 46%, rgba(0, 0, 0, 0.92) 58%, rgba(0, 0, 0, 0.4) 72%, transparent 86%);
         }
 
+        /* Alpha fade to smoothly blend photo bottom into canvas with zero grey halo */
+        .orv-portrait-fade {
+          mask-image: linear-gradient(to bottom, #000 55%, rgba(0, 0, 0, 0.8) 72%, rgba(0, 0, 0, 0.2) 90%, transparent 98%);
+          -webkit-mask-image: linear-gradient(to bottom, #000 55%, rgba(0, 0, 0, 0.8) 72%, rgba(0, 0, 0, 0.2) 90%, transparent 98%);
+        }
+
         /* Solid dark backing behind head/hood so text from z-[5] never shines through the hood */
         .orv-portrait-backing {
           position: absolute;
@@ -147,13 +153,13 @@ export default function HeroSection() {
           .orv-panel-avail  { display: none !important; }
           .orv-brandplate   { display: none !important; }
 
-          /* Centered, elevated portrait on mobile */
+          /* Centered, elevated portrait on mobile with clean proportions */
           .orv-portrait-wrap {
-            width: clamp(300px, 90vw, 440px) !important;
-            height: clamp(400px, 62svh, 540px) !important;
+            width: clamp(280px, 86vw, 380px) !important;
+            height: clamp(340px, 50svh, 450px) !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
-            top: 72px !important;
+            top: 56px !important;
             bottom: auto !important;
             mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, #000 48%, rgba(0, 0, 0, 0.9) 62%, transparent 88%) !important;
             -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, #000 48%, rgba(0, 0, 0, 0.9) 62%, transparent 88%) !important;
@@ -165,14 +171,14 @@ export default function HeroSection() {
 
           /* Velocity text passes right behind the hood on mobile */
           .orv-velocity-wrap {
-            top: 220px !important;
+            top: clamp(140px, 20svh, 175px) !important;
           }
 
           /* Compact, centered about/CTA block at screen bottom */
           .orv-about-block {
             left: 16px !important;
             right: 16px !important;
-            bottom: 24px !important;
+            bottom: clamp(16px, 2.5svh, 24px) !important;
             top: auto !important;
             max-width: none !important;
             display: flex !important;
@@ -185,11 +191,15 @@ export default function HeroSection() {
           .orv-about-block p {
             font-size: 12px !important;
             max-width: 320px !important;
-            margin-bottom: 14px !important;
+            margin-bottom: 10px !important;
+            line-height: 1.35 !important;
           }
 
-          .orv-about-block .flex-wrap {
+          .orv-about-block .cta-container {
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
             justify-content: center !important;
+            gap: 10px !important;
           }
         }
       `}</style>
@@ -199,7 +209,7 @@ export default function HeroSection() {
       ════════════════════════════════════════════════════════════════════ */}
       <section
         id="home"
-        className="relative w-full overflow-hidden sticky top-0 z-10 bg-[#030303] h-[100svh] min-h-[600px] md:min-h-[938px]"
+        className="relative w-full overflow-hidden sticky top-0 z-10 bg-[#030303] h-[100svh] md:min-h-[938px]"
         aria-label="Hero"
       >
 
@@ -302,8 +312,8 @@ export default function HeroSection() {
             modern engineering practices.
           </p>
 
-          {/* CTAs — stacked to avoid overlap */}
-          <div className="flex flex-col gap-3">
+          {/* CTAs — clean row on mobile, stacked column on desktop */}
+          <div className="cta-container flex flex-col gap-3">
             <div>
               <StarBorder href="#projects" speed="4.5s">
                 <span className="text-xs">Explore My Work</span>
@@ -313,7 +323,7 @@ export default function HeroSection() {
             <Magnet magnetStrength={0.25} padding={70}>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center min-h-[38px] px-5 py-2 rounded-lg bg-[#0a0a0a]/90 backdrop-blur-sm text-white border border-[#1a1a1a] font-semibold text-xs hover:bg-[#1a1a1a]/60 hover:border-white/40 transition-all"
+                className="inline-flex items-center justify-center min-h-[38px] px-5 py-2 rounded-lg bg-white text-[#0c0d0e] border border-black/15 font-semibold text-xs hover:bg-neutral-100 dark:bg-[#0a0a0a]/90 dark:text-white dark:border-[#1a1a1a] dark:hover:bg-[#1a1a1a]/60 dark:hover:border-white/40 backdrop-blur-sm transition-all shadow-sm dark:shadow-none"
               >
                 Let&apos;s Work Together
               </a>
@@ -355,7 +365,7 @@ export default function HeroSection() {
           {/* Solid black backing behind hood so moving letters cleanly hide behind Amrit */}
           <div className="orv-portrait-backing" aria-hidden="true" />
 
-          <div ref={portraitRef} className="w-full h-full will-change-transform relative z-[1]">
+          <div ref={portraitRef} className="orv-portrait-fade w-full h-full will-change-transform relative z-[1]">
             <picture>
               <source srcSet="/cinematic/hero-portrait.webp" type="image/webp" />
               {/* eslint-disable-next-line @next/next/no-img-element */}

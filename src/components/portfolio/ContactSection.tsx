@@ -219,7 +219,11 @@ export default function ContactSection() {
   const messageLength = formData.message.trim().length;
 
   return (
-    <section id="contact" className="relative py-20 sm:py-28 overflow-hidden rounded-3xl border border-[#1a1a1a] bg-[#030303] my-8 sm:my-12 px-6 sm:px-10 lg:px-14 shadow-2xl">
+    <section
+      id="contact"
+      data-theme="dark"
+      className="dark-island relative py-20 sm:py-28 overflow-hidden rounded-3xl border border-[#1a1a1a] bg-[#030303] my-8 sm:my-12 px-6 sm:px-10 lg:px-14 shadow-2xl text-white"
+    >
       {/* ── Interactive 3D Hyperspeed Highway Backdrop ── */}
       <div className="absolute inset-0 z-0">
         <Hyperspeed
@@ -284,7 +288,7 @@ export default function ContactSection() {
               </p>
               <div className="pt-2 space-y-2.5 text-xs font-mono">
                 <div>
-                  <span className="text-[#777777]">Email: </span>
+                  <span className="text-[#cbd5e1] font-semibold">Email: </span>
                   <a
                     href={`mailto:${CONTACT_INFO.email}`}
                     className="text-[#ffffff] hover:underline transition-colors"
@@ -293,7 +297,7 @@ export default function ContactSection() {
                   </a>
                 </div>
                 <div>
-                  <span className="text-[#777777]">LinkedIn: </span>
+                  <span className="text-[#cbd5e1] font-semibold">LinkedIn: </span>
                   <a
                     href={CONTACT_INFO.linkedinUrl}
                     target="_blank"
@@ -304,7 +308,7 @@ export default function ContactSection() {
                   </a>
                 </div>
                 <div>
-                  <span className="text-[#777777]">Phone: </span>
+                  <span className="text-[#cbd5e1] font-semibold">Phone: </span>
                   <a
                     href={`tel:${CONTACT_INFO.phone?.replace(/\s/g, '')}`}
                     className="text-[#ffffff] hover:underline transition-colors"
@@ -313,7 +317,7 @@ export default function ContactSection() {
                   </a>
                 </div>
                 <div>
-                  <span className="text-[#777777]">Resume: </span>
+                  <span className="text-[#cbd5e1] font-semibold">Resume: </span>
                   <a
                     href={CONTACT_INFO.resumeUrl}
                     target="_blank"
@@ -336,7 +340,7 @@ export default function ContactSection() {
               </p>
               <div className="pt-2 space-y-2.5 text-xs font-mono">
                 <div>
-                  <span className="text-[#777777]">WhatsApp: </span>
+                  <span className="text-[#cbd5e1] font-semibold">WhatsApp: </span>
                   <a
                     href={CONTACT_INFO.whatsappUrl}
                     target="_blank"
@@ -347,7 +351,7 @@ export default function ContactSection() {
                   </a>
                 </div>
                 <div>
-                  <span className="text-[#777777]">Direct Email: </span>
+                  <span className="text-[#cbd5e1] font-semibold">Direct Email: </span>
                   <a
                     href={`mailto:${CONTACT_INFO.email}?subject=Freelance%20Project%20Discussion`}
                     className="text-[#ffffff] hover:underline transition-colors"

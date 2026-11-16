@@ -44,7 +44,7 @@
   }
 
   :focus-visible {
-    outline: 1.5px solid #ffffff;
+    outline: 2px solid currentColor;
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -134,9 +134,24 @@ html.dark::view-transition-new(root) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   LIGHT MODE ADAPTATION
+   SEMANTIC TOKENS & LIGHT MODE ADAPTATION
 ══════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --color-bg-page: #030303;
+  --color-bg-surface: #0a0a0a;
+  --color-border-subtle: #1a1a1a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #aaadb0;
+  --color-text-muted: #777777;
+}
+
 html.light {
+  --color-bg-page: #f7f8fa;
+  --color-bg-surface: #ffffff;
+  --color-border-subtle: #e5e7eb;
+  --color-text-primary: #0c0d0e;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #595959;
   background-color: #f7f8fa;
   color: #1a1a1a;
 }
@@ -187,12 +202,12 @@ html.light .border-white\/10 {
   border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Typography in Light Mode */
-html.light .text-\[\#ffffff\] {
+/* Typography in Light Mode (High Contrast WCAG AA >= 4.5:1) */
+html.light .text-\[\#ffffff\]:not(.nav-talk-btn) {
   color: #0c0d0e !important;
 }
 
-html.light .text-\[\#fdfdfd\] {
+html.light .text-\[\#fdfdfd\]:not(.nav-talk-btn) {
   color: #0c0d0e !important;
 }
 
@@ -201,14 +216,14 @@ html.light .text-\[\#aaadb0\] {
 }
 
 html.light .text-\[\#9a9a9a\] {
-  color: #6b7280 !important;
+  color: #52525b !important;
 }
 
 html.light .text-\[\#777777\] {
-  color: #9ca3af !important;
+  color: #595959 !important;
 }
 
-html.light .text-white {
+html.light .text-white:not(.nav-talk-btn) {
   color: #0c0d0e !important;
 }
 
@@ -235,11 +250,11 @@ html.light .orv-brandplate svg polygon:last-child {
 }
 
 html.light .orv-portrait-backing {
-  background: radial-gradient(ellipse 42% 48% at 50% 40%, #f7f8fa 55%, transparent 78%) !important;
+  opacity: 0.25 !important;
 }
 
 html.light .orv-portrait-bottom {
-  background: linear-gradient(to top, #f7f8fa 0%, transparent 50%) !important;
+  display: none !important;
 }
 
 html.light .orv-panel-stats > div {
@@ -260,5 +275,116 @@ html.light .orv-btn {
 
 html.light .orv-btn span {
   color: #ffffff !important;
+}
+
+html.light .nav-talk-btn {
+  background-color: #0c0d0e !important;
+  color: #ffffff !important;
+}
+
+html.light .nav-talk-btn:hover {
+  background-color: #262626 !important;
+  color: #ffffff !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   SCOPED DARK ISLAND BOUNDARIES
+   Isolates sections that MUST remain dark in Light Mode (About Folder, 
+   Freelancing Banner, Pricing Cards, Contact Section, Footer).
+══════════════════════════════════════════════════════════════════════════════ */
+.dark-island,
+[data-theme='dark'] {
+  --color-bg-page: #030303;
+  --color-bg-surface: #0a0a0a;
+  --color-border-subtle: #1a1a1a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #aaadb0;
+  --color-text-muted: #8b929a;
+}
+
+html.light .dark-island,
+html.light [data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/* Prevent global light typography from inverting text inside dark islands */
+html.light .dark-island .text-white,
+html.light .dark-island .text-\[\#ffffff\],
+html.light .dark-island .text-\[\#fdfdfd\],
+html.light [data-theme='dark'] .text-white,
+html.light [data-theme='dark'] .text-\[\#ffffff\],
+html.light [data-theme='dark'] .text-\[\#fdfdfd\] {
+  color: #ffffff !important;
+}
+
+html.light .dark-island h1,
+html.light .dark-island h2,
+html.light .dark-island h3,
+html.light .dark-island h4,
+html.light .dark-island h5,
+html.light .dark-island h6,
+html.light [data-theme='dark'] h1,
+html.light [data-theme='dark'] h2,
+html.light [data-theme='dark'] h3,
+html.light [data-theme='dark'] h4,
+html.light [data-theme='dark'] h5,
+html.light [data-theme='dark'] h6 {
+  color: #ffffff !important;
+}
+
+html.light .dark-island .text-\[\#aaadb0\],
+html.light [data-theme='dark'] .text-\[\#aaadb0\] {
+  color: #aaadb0 !important;
+}
+
+html.light .dark-island .text-\[\#9a9a9a\],
+html.light [data-theme='dark'] .text-\[\#9a9a9a\] {
+  color: #9a9a9a !important;
+}
+
+html.light .dark-island .text-\[\#777777\],
+html.light [data-theme='dark'] .text-\[\#777777\] {
+  color: #8b929a !important;
+}
+
+html.light .dark-island .text-\[\#555555\],
+html.light [data-theme='dark'] .text-\[\#555555\] {
+  color: #71717a !important;
+}
+
+/* Prevent backgrounds inside dark islands from turning white */
+html.light .dark-island .bg-\[\#030303\],
+html.light [data-theme='dark'] .bg-\[\#030303\] {
+  background-color: #030303 !important;
+}
+
+html.light .dark-island .bg-\[\#0a0a0a\],
+html.light [data-theme='dark'] .bg-\[\#0a0a0a\] {
+  background-color: #0a0a0a !important;
+}
+
+html.light .dark-island .bg-\[\#0c0c0d\],
+html.light [data-theme='dark'] .bg-\[\#0c0c0d\] {
+  background-color: #0c0c0d !important;
+}
+
+html.light .dark-island .bg-\[\#060606\]\/80,
+html.light [data-theme='dark'] .bg-\[\#060606\]\/80 {
+  background-color: rgba(6, 6, 6, 0.8) !important;
+}
+
+html.light .dark-island .bg-\[\#060606\]\/85,
+html.light [data-theme='dark'] .bg-\[\#060606\]\/85 {
+  background-color: rgba(6, 6, 6, 0.85) !important;
+}
+
+html.light .dark-island .border-\[\#1a1a1a\],
+html.light [data-theme='dark'] .border-\[\#1a1a1a\] {
+  border-color: #1a1a1a !important;
+}
+
+html.light .dark-island .border-white\/10,
+html.light [data-theme='dark'] .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 

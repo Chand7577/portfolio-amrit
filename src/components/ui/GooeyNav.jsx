@@ -16,18 +16,18 @@ const THEMES = {
     '--gn-muted': 'rgba(255, 255, 255, 0.7)'
   },
   light: {
-    '--gn-frame': 'rgba(240, 240, 243, 0.8)',
-    '--gn-frame-edge': 'rgba(24, 24, 27, 0.07)',
-    '--gn-frame-highlight': 'rgba(255, 255, 255, 0.95)',
-    '--gn-frame-shadow': '0 22px 44px -22px rgba(24, 24, 27, 0.3), 0 6px 16px -10px rgba(24, 24, 27, 0.16)',
-    '--gn-ink': '#27272a',
-    '--gn-muted': 'rgba(39, 39, 42, 0.62)'
+    '--gn-frame': 'rgba(255, 255, 255, 0.88)',
+    '--gn-frame-edge': 'rgba(0, 0, 0, 0.12)',
+    '--gn-frame-highlight': 'rgba(255, 255, 255, 1)',
+    '--gn-frame-shadow': '0 8px 32px rgba(0, 0, 0, 0.08)',
+    '--gn-ink': '#0c0d0e',
+    '--gn-muted': '#4b5563'
   }
 };
 
 const PILLS = {
   dark: { color: '#ffffff', hover: 'rgba(255, 255, 255, 0.08)', shadow: 0.4 },
-  light: { color: '#27272a', hover: 'rgba(24, 24, 27, 0.06)', shadow: 0.2 }
+  light: { color: '#0c0d0e', hover: 'rgba(0, 0, 0, 0.06)', shadow: 0.2 }
 };
 
 const SIZES = { sm: 'gooey-nav--sm', md: 'gooey-nav--md', lg: 'gooey-nav--lg' };

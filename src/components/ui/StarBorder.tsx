@@ -38,7 +38,7 @@ export default function StarBorder({
       />
 
       {/* Button Body / Inner Core */}
-      <span className="relative z-10 w-full h-full min-h-[42px] px-6 py-2.5 rounded-[6.5px] bg-[#ffffff] text-[#030303] font-semibold flex items-center justify-center gap-2 transition-colors group-hover:bg-[#fdfdfd] shadow-[0_0_20px_rgba(255,255,255,0.18)]">
+      <span className="relative z-10 w-full h-full min-h-[42px] px-6 py-2.5 rounded-[6.5px] bg-[#ffffff] text-[#030303] font-semibold flex items-center justify-center gap-2 transition-colors group-hover:bg-[#fdfdfd] border border-black/10 dark:border-transparent shadow-sm dark:shadow-[0_0_20px_rgba(255,255,255,0.18)]">
         {children}
       </span>
     </Component>

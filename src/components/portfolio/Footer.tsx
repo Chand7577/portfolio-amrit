@@ -13,7 +13,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full bg-[#080808] border-t border-[#1a1a1a] overflow-hidden mt-24 sm:mt-32 pt-14 sm:pt-20 lg:pt-24">
+    <footer
+      data-theme="dark"
+      className="dark-island relative w-full bg-[#080808] border-t border-[#1a1a1a] rounded-t-[2.5rem] overflow-hidden mt-24 sm:mt-32 pt-14 sm:pt-20 lg:pt-24"
+    >
       {/* Subtle Ambient Radial Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-white/[0.025] blur-[140px] pointer-events-none rounded-full" />
 
@@ -78,7 +81,7 @@ export default function Footer() {
             </div>
 
             {/* Location Block (Tallinn removed) */}
-            <div className="text-xs sm:text-sm text-[#777777] font-normal leading-relaxed space-y-0.5">
+            <div className="text-xs sm:text-sm text-[#9a9a9a] font-normal leading-relaxed space-y-0.5">
               <p>Dehradun, Uttarakhand, India</p>
               <a
                 href={`tel:${CONTACT_INFO.phone}`}
@@ -130,7 +133,7 @@ export default function Footer() {
             </div>
 
             {/* Copyright */}
-            <div className="text-center text-xs font-mono text-[#777777] mt-8">
+            <div className="text-center text-xs font-mono text-[#9a9a9a] mt-8">
               <span>&copy; {currentYear} Amrit Chand. All Rights Reserved.</span>
             </div>
           </div>
@@ -150,11 +153,11 @@ export default function Footer() {
         </div>
 
         {/* ── Sub-links Row ── */}
-        <div className="pt-10 sm:pt-14 mt-6 sm:mt-10 border-t border-[#1a1a1a]/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#777777]">
+        <div className="pt-10 sm:pt-14 mt-6 sm:mt-10 border-t border-[#1a1a1a]/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#9a9a9a]">
           <span className="hover:text-white transition-colors cursor-default">
             Terms and conditions
           </span>
-          <span className="hidden sm:inline text-[#777777]/50">&bull;</span>
+          <span className="hidden sm:inline text-[#9a9a9a]/50">&bull;</span>
           <a
             href={CONTACT_INFO.resumeUrl}
             target="_blank"

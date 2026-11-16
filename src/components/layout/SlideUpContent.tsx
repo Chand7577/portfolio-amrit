@@ -24,12 +24,11 @@
 export default function SlideUpContent({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="relative z-20 bg-[#030303] rounded-t-[2rem] min-h-screen"
-      style={{ boxShadow: '0 -32px 80px rgba(0,0,0,1)' }}
+      className="relative z-20 bg-[var(--color-bg-page,#030303)] rounded-t-[2rem] min-h-screen shadow-[0_-20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_-32px_80px_rgba(0,0,0,1)]"
     >
       {/* Drag handle */}
       <div className="flex justify-center pt-5 pb-0">
-        <div className="w-10 h-1 rounded-full bg-[#2a2a2a]" />
+        <div className="w-10 h-1 rounded-full bg-[#d1d5db] dark:bg-[#2a2a2a]" />
       </div>
       {children}
     </div>

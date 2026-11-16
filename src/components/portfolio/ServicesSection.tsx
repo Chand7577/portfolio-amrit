@@ -13,8 +13,11 @@ export default function ServicesSection() {
   return (
     <section id="freelancing" className="py-20 sm:py-28 border-b border-[#1a1a1a]">
       <div className="space-y-10 sm:space-y-12">
-        {/* ── Interactive "Have a Project in Mind?" Banner with MagicRings ── */}
-        <div className="relative w-full rounded-2xl sm:rounded-3xl border border-[#1a1a1a] bg-[#070707] overflow-hidden p-8 sm:p-12 lg:p-16 shadow-2xl min-h-[360px] sm:min-h-[400px] flex flex-col justify-between">
+        {/* ── Interactive "Have a Project in Mind?" Banner with MagicRings (Dark Island) ── */}
+        <div
+          data-theme="dark"
+          className="dark-island relative w-full rounded-2xl sm:rounded-3xl border border-[#1a1a1a] bg-[#070707] overflow-hidden p-8 sm:p-12 lg:p-16 shadow-2xl min-h-[360px] sm:min-h-[400px] flex flex-col justify-between"
+        >
           {/* Background WebGL MagicRings */}
           <div className="absolute inset-0 z-0">
             <MagicRings
@@ -73,18 +76,18 @@ export default function ServicesSection() {
           {SERVICES.map((service) => (
             <div
               key={service.number}
-              className="p-6 sm:p-7 rounded-xl bg-[#0a0a0a] border border-[#1a1a1a] hover:border-[#ffffff]/25 transition-colors space-y-3"
+              className="p-6 sm:p-7 rounded-xl bg-white border border-black/10 dark:bg-[#0a0a0a] dark:border-[#1a1a1a] hover:border-black/25 dark:hover:border-[#ffffff]/25 shadow-sm dark:shadow-none transition-colors space-y-3"
             >
-              <div className="flex items-center justify-between border-b border-[#1a1a1a] pb-2.5">
-                <h3 className="font-heading font-semibold text-lg text-[#ffffff]">
+              <div className="flex items-center justify-between border-b border-black/10 dark:border-[#1a1a1a] pb-2.5">
+                <h3 className="font-heading font-semibold text-lg text-[#0c0d0e] dark:text-[#ffffff]">
                   {service.title}
                 </h3>
-                <span className="text-xs font-mono text-[#777777] font-semibold">
+                <span className="text-xs font-mono text-[#52525b] dark:text-[#777777] font-semibold">
                   {service.number}
                 </span>
               </div>
 
-              <p className="text-xs sm:text-sm text-[#9a9a9a] leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-[#374151] dark:text-[#9a9a9a] leading-relaxed font-normal">
                 {service.description}
               </p>
             </div>

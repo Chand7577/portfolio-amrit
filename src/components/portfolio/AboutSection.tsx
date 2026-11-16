@@ -493,7 +493,10 @@ export default function AboutSection() {
         </div>
 
         {/* Centerpiece: 3D "About Me" Folder */}
-        <div className="flex flex-col items-center justify-center p-8 sm:p-14 lg:p-20 rounded-3xl bg-[#07070a] border border-[#1a1a1a] relative overflow-hidden min-h-[520px] shadow-2xl">
+        <div
+          data-theme="dark"
+          className="dark-island flex flex-col items-center justify-center p-8 sm:p-14 lg:p-20 rounded-3xl bg-[#07070a] border border-[#1a1a1a] relative overflow-hidden min-h-[520px] shadow-2xl"
+        >
           {/* Subtle ambient light glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-sky-500/[0.03] blur-[120px] pointer-events-none rounded-full" />
 
@@ -551,7 +554,8 @@ export default function AboutSection() {
           {/* Enlarged Document Sheet (~60vh height, Animated Enlargement with GSAP) */}
           <div
             ref={modalCardRef}
-            className="relative z-10 w-full max-w-2xl h-[60vh] min-h-[460px] max-h-[62vh] rounded-2xl bg-[#0d0e15] border border-white/15 shadow-[0_20px_70px_rgba(0,0,0,0.85)] flex flex-col overflow-hidden text-white"
+            data-theme="dark"
+            className="dark-island relative z-10 w-full max-w-2xl h-[60vh] min-h-[460px] max-h-[62vh] rounded-2xl bg-[#0d0e15] border border-white/15 shadow-[0_20px_70px_rgba(0,0,0,0.85)] flex flex-col overflow-hidden text-white"
           >
             {/* Document Header Bar */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#12131b]/90 shrink-0">

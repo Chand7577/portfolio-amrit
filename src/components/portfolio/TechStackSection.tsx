@@ -64,12 +64,12 @@ export default function TechStackSection() {
         </div>
 
         {/* Right — DriftWall */}
-        <div className="lg:w-3/5 flex-shrink-0" style={{ height: 540 }}>
+        <div className="lg:w-3/5 flex-shrink-0 overflow-hidden" style={{ height: 540 }}>
           <DriftWall
             items={TECH_ITEMS}
             columns={4}
-            tileWidth={150}
-            tileHeight={150}
+            tileWidth={130}
+            tileHeight={130}
             gap={12}
             radius={16}
             tilt={8}
@@ -83,7 +83,6 @@ export default function TechStackSection() {
             lift={56}
             fade={0.4}
             dim={0.88}
-            overlayColor="#030303"
             grayscale={false}
           />
         </div>

@@ -3,30 +3,13 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
 }
 
 .drift-wall::before,
 .drift-wall::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.drift-wall::before {
-  top: 0;
-  height: 30%;
-  background: linear-gradient(to bottom, var(--dw-overlay, #060010), transparent);
-  opacity: var(--dw-fade, 0.6);
-}
-
-.drift-wall::after {
-  bottom: 0;
-  height: 30%;
-  background: linear-gradient(to top, var(--dw-overlay, #060010), transparent);
-  opacity: var(--dw-fade, 0.6);
+  display: none !important;
 }
 
 .drift-wall__plane {
@@ -81,7 +64,36 @@
   overflow: hidden;
   text-decoration: none;
   background: #13131f;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+html.light .drift-wall__tile-inner {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+html.light .drift-wall__label {
+  color: #0c0d0e;
+}
+
+/* Invert monochrome dark logos on dark tiles so they never vanish */
+html.dark .drift-wall__tile img[src*='nextjs'],
+html.dark .drift-wall__tile img[src*='express'],
+html.dark .drift-wall__tile img[src*='socketio'],
+html.dark .drift-wall__tile img[src*='github'],
+:root:not(.light) .drift-wall__tile img[src*='nextjs'],
+:root:not(.light) .drift-wall__tile img[src*='express'],
+:root:not(.light) .drift-wall__tile img[src*='socketio'],
+:root:not(.light) .drift-wall__tile img[src*='github'] {
+  filter: invert(1) brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+html.light .drift-wall__tile img[src*='nextjs'],
+html.light .drift-wall__tile img[src*='express'],
+html.light .drift-wall__tile img[src*='socketio'],
+html.light .drift-wall__tile img[src*='github'] {
+  filter: none;
 }
 
 .drift-wall__tile-inner::after {

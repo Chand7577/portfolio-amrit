@@ -24,95 +24,96 @@ export default function PricingSection() {
           {PRICING_PLANS.map((plan, idx) => {
             const isFeatured = idx === 1;
             return (
-              <PixelCard
-                key={plan.title}
-                variant={isFeatured ? 'blue' : 'default'}
-                glowColor={isFeatured ? '#38bdf8' : '#94a3b8'}
-                colors={
-                  isFeatured
-                    ? ['#38bdf8', '#7dd3fc', '#e0f2fe']
-                    : ['#ffffff', '#cbd5e1', '#64748b']
-                }
-                radius={16}
-                gap={6}
-                pixelSize={2.2}
-                speed={isFeatured ? 40 : 25}
-                spotlight={0.55}
-                glow={isFeatured ? 0.6 : 0.35}
-                opacity={0.4}
-                trigger="hover"
-                intro={true}
-                introDelay={idx * 120}
-                className={`w-full h-full min-h-[440px] transition-all duration-300 ${
-                  isFeatured
-                    ? 'shadow-[0_0_30px_rgba(56,189,248,0.12)] border border-sky-400/30'
-                    : 'hover:border-white/20'
-                }`}
-              >
-                <div className="p-6 flex flex-col justify-between w-full h-full select-none">
-                  <div className="space-y-4">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="font-heading font-semibold text-base sm:text-lg text-[#ffffff]">
-                          {plan.title}
-                        </h3>
-                        <div className="mt-2 text-2xl sm:text-3xl font-heading font-bold text-[#ffffff] tracking-tight">
-                          {plan.price}
-                          <span className="text-xs font-mono font-normal text-[#777777] ml-1.5">
-                            starting
-                          </span>
+              <div key={plan.title} data-theme="dark" className="dark-island w-full h-full">
+                <PixelCard
+                  variant={isFeatured ? 'blue' : 'default'}
+                  glowColor={isFeatured ? '#38bdf8' : '#94a3b8'}
+                  colors={
+                    isFeatured
+                      ? ['#38bdf8', '#7dd3fc', '#e0f2fe']
+                      : ['#ffffff', '#cbd5e1', '#64748b']
+                  }
+                  radius={16}
+                  gap={6}
+                  pixelSize={2.2}
+                  speed={isFeatured ? 40 : 25}
+                  spotlight={0.55}
+                  glow={isFeatured ? 0.6 : 0.35}
+                  opacity={0.4}
+                  trigger="hover"
+                  intro={true}
+                  introDelay={idx * 120}
+                  className={`w-full h-full min-h-[440px] transition-all duration-300 ${
+                    isFeatured
+                      ? 'shadow-[0_0_30px_rgba(56,189,248,0.12)] border border-sky-400/30'
+                      : 'border border-white/10 hover:border-white/30'
+                  }`}
+                >
+                  <div className="p-6 flex flex-col justify-between w-full h-full select-none text-white">
+                    <div className="space-y-4">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className="font-heading font-semibold text-base sm:text-lg text-white">
+                            {plan.title}
+                          </h3>
+                          <div className="mt-2 text-2xl sm:text-3xl font-heading font-bold text-white tracking-tight">
+                            {plan.price}
+                            <span className="text-xs font-mono font-normal text-[#8b929a] ml-1.5">
+                              starting
+                            </span>
+                          </div>
                         </div>
+
+                        {isFeatured && (
+                          <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-semibold uppercase bg-sky-400/10 text-sky-400 border border-sky-400/20">
+                            Popular
+                          </span>
+                        )}
                       </div>
 
-                      {isFeatured && (
-                        <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-semibold uppercase bg-sky-400/10 text-sky-400 border border-sky-400/20">
-                          Popular
-                        </span>
-                      )}
+                      <p className="text-xs text-[#aaadb0] leading-relaxed font-normal border-b border-white/10 pb-3">
+                        {plan.description}
+                      </p>
+
+                      {/* Inclusions */}
+                      <ul className="space-y-2 pt-1">
+                        {plan.features.map((feat, fIdx) => (
+                          <li
+                            key={fIdx}
+                            className="flex items-start gap-2 text-xs text-[#cbd5e1] leading-normal"
+                          >
+                            <span className={isFeatured ? 'text-sky-400 text-xs font-bold' : 'text-sky-300 text-xs font-bold'}>
+                              ✓
+                            </span>
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    <p className="text-xs text-[#aaadb0] leading-relaxed font-normal border-b border-white/10 pb-3">
-                      {plan.description}
-                    </p>
-
-                    {/* Inclusions */}
-                    <ul className="space-y-2 pt-1">
-                      {plan.features.map((feat, fIdx) => (
-                        <li
-                          key={fIdx}
-                          className="flex items-start gap-2 text-xs text-[#9a9a9a] leading-normal"
-                        >
-                          <span className={isFeatured ? 'text-sky-400 text-xs' : 'text-[#ffffff] text-xs'}>
-                            ✓
-                          </span>
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Enquiry Button */}
+                    <div className="pt-6">
+                      <a
+                        href="#contact"
+                        className={`block w-full py-2.5 px-3 text-center rounded-lg text-xs font-semibold transition-all ${
+                          isFeatured
+                            ? 'bg-sky-400 text-[#030303] hover:bg-sky-300 font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]'
+                            : 'bg-white/10 text-white hover:bg-white hover:text-[#030303] border border-white/20 hover:border-white font-semibold'
+                        }`}
+                      >
+                        Enquire Now &rarr;
+                      </a>
+                    </div>
                   </div>
-
-                  {/* Enquiry Button */}
-                  <div className="pt-6">
-                    <a
-                      href="#contact"
-                      className={`block w-full py-2.5 px-3 text-center rounded-lg text-xs font-semibold transition-all ${
-                        isFeatured
-                          ? 'bg-sky-400 text-[#030303] hover:bg-sky-300 font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]'
-                          : 'bg-white/10 text-[#ffffff] hover:bg-[#ffffff] hover:text-[#030303] border border-white/10 hover:border-[#ffffff]'
-                      }`}
-                    >
-                      Enquire Now &rarr;
-                    </a>
-                  </div>
-                </div>
-              </PixelCard>
+                </PixelCard>
+              </div>
             );
           })}
         </div>
 
         {/* Scope disclaimer note */}
-        <div className="p-4 rounded-lg bg-[#0a0a0a] border border-[#1a1a1a] text-xs font-mono text-[#777777] max-w-2xl">
-          <span className="text-[#ffffff] font-semibold">* Note: </span>
+        <div className="p-4 rounded-lg bg-white border border-black/10 dark:bg-[#0a0a0a] dark:border-[#1a1a1a] text-xs font-mono text-[#52525b] dark:text-[#777777] max-w-2xl shadow-sm dark:shadow-none">
+          <span className="text-[#0c0d0e] dark:text-[#ffffff] font-semibold">* Note: </span>
           <span>
             Final pricing depends on your specific project requirements, page count, and technical complexity.
           </span>
