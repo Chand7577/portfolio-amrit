@@ -153,20 +153,20 @@ export default function HeroSection() {
           .orv-panel-avail  { display: none !important; }
           .orv-brandplate   { display: none !important; }
 
-          /* Centered, elevated portrait on mobile with clean proportions */
+          /* Centered, prominent portrait on mobile with balanced screen coverage */
           .orv-portrait-wrap {
-            width: clamp(280px, 86vw, 380px) !important;
-            height: clamp(340px, 50svh, 450px) !important;
+            width: clamp(320px, 94vw, 460px) !important;
+            height: clamp(420px, 62svh, 540px) !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
-            top: 56px !important;
+            top: clamp(32px, 4.5svh, 48px) !important;
             bottom: auto !important;
-            mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, #000 48%, rgba(0, 0, 0, 0.9) 62%, transparent 88%) !important;
-            -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, #000 48%, rgba(0, 0, 0, 0.9) 62%, transparent 88%) !important;
+            mask-image: radial-gradient(ellipse 58% 66% at 50% 46%, #000 54%, rgba(0, 0, 0, 0.88) 72%, transparent 94%) !important;
+            -webkit-mask-image: radial-gradient(ellipse 58% 66% at 50% 46%, #000 54%, rgba(0, 0, 0, 0.88) 72%, transparent 94%) !important;
           }
 
           .orv-portrait-bottom {
-            background: linear-gradient(to top, #030303 0%, rgba(3, 3, 3, 0.7) 35%, transparent 65%) !important;
+            background: linear-gradient(to top, #030303 0%, rgba(3, 3, 3, 0.5) 20%, transparent 48%) !important;
           }
 
           /* Velocity text passes right behind the hood on mobile */
@@ -174,11 +174,11 @@ export default function HeroSection() {
             top: clamp(140px, 20svh, 175px) !important;
           }
 
-          /* Compact, centered about/CTA block at screen bottom */
+          /* Compact, centered about/CTA block brought up closer to portrait */
           .orv-about-block {
             left: 16px !important;
             right: 16px !important;
-            bottom: clamp(16px, 2.5svh, 24px) !important;
+            bottom: clamp(24px, 4.5svh, 44px) !important;
             top: auto !important;
             max-width: none !important;
             display: flex !important;
@@ -191,8 +191,8 @@ export default function HeroSection() {
           .orv-about-block p {
             font-size: 12px !important;
             max-width: 320px !important;
-            margin-bottom: 10px !important;
-            line-height: 1.35 !important;
+            margin-bottom: 12px !important;
+            line-height: 1.4 !important;
           }
 
           .orv-about-block .cta-container {
@@ -209,7 +209,7 @@ export default function HeroSection() {
       ════════════════════════════════════════════════════════════════════ */}
       <section
         id="home"
-        className="relative w-full overflow-hidden sticky top-0 z-10 bg-[#030303] h-[100svh] md:min-h-[938px]"
+        className="relative w-full overflow-hidden sticky top-0 z-10 bg-[#030303] h-[100svh] min-h-[640px]"
         aria-label="Hero"
       >
 
@@ -279,7 +279,7 @@ export default function HeroSection() {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════
-            ABOUT / CTA BLOCK — bottom left, spaced well below heading
+            ABOUT / CTA BLOCK — bottom left, elevated cleanly above viewport edge
         ═══════════════════════════════════════════════════════════════════ */}
         <div
           className={`orv-about-block absolute z-20 ${fadeUp(360)}`}
@@ -294,10 +294,10 @@ export default function HeroSection() {
             alignItems: 'center',
             textAlign: 'center',
             ...delay(360),
-          } : { left: '57px', bottom: '72px', maxWidth: '260px', ...delay(360) }}
+          } : { left: '57px', bottom: 'clamp(64px, 9.5vh, 100px)', maxWidth: '380px', ...delay(360) }}
         >
           {/* Availability */}
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-2.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
             <ShinyText
               text={CONTACT_INFO.availability}
@@ -307,31 +307,32 @@ export default function HeroSection() {
           </div>
 
           {/* Tagline */}
-          <p className="text-[13px] text-[#9a9a9a] leading-snug font-normal mb-5">
+          <p className="text-[13px] text-[#9a9a9a] leading-relaxed font-normal mb-4">
             I build fast, scalable web applications with clean code and
             modern engineering practices.
           </p>
 
-          {/* CTAs — clean row on mobile, stacked column on desktop */}
-          <div className="cta-container flex flex-col gap-3">
+          {/* CTAs — clean row on desktop & mobile */}
+          <div className="cta-container flex flex-wrap items-center gap-3">
             <div>
               <StarBorder href="#projects" speed="4.5s">
                 <span className="text-xs">Explore My Work</span>
                 <span className="text-xs font-mono ml-1">↗</span>
               </StarBorder>
             </div>
-            <Magnet magnetStrength={0.25} padding={70}>
+            <Magnet magnetStrength={0.25} padding={50}>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center min-h-[38px] px-5 py-2 rounded-lg bg-white text-[#0c0d0e] border border-black/15 font-semibold text-xs hover:bg-neutral-100 dark:bg-[#0a0a0a]/90 dark:text-white dark:border-[#1a1a1a] dark:hover:bg-[#1a1a1a]/60 dark:hover:border-white/40 backdrop-blur-sm transition-all shadow-sm dark:shadow-none"
+                className="group inline-flex items-center justify-center min-h-[42px] px-5 py-2.5 rounded-lg bg-black/[0.04] hover:bg-black/[0.08] dark:bg-white/[0.05] dark:hover:bg-white/[0.1] text-[#0c0d0e] dark:text-white border border-black/15 hover:border-black/30 dark:border-white/15 dark:hover:border-white/35 backdrop-blur-md font-semibold text-xs transition-all duration-200 shadow-sm hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.08)] active:scale-[0.98]"
               >
-                Let&apos;s Work Together
+                <span>Let&apos;s Work Together</span>
+                <span className="text-xs ml-1.5 transition-transform duration-200 group-hover:translate-x-0.5">→</span>
               </a>
             </Magnet>
           </div>
 
           {/* Tech line */}
-          <p className="text-[10px] font-mono text-[#444] mt-4 tracking-wide">
+          <p className="text-[10px] font-mono text-[#555] mt-3.5 tracking-wide">
             React · Next.js · Node.js · MongoDB · PostgreSQL
           </p>
         </div>
@@ -411,7 +412,7 @@ export default function HeroSection() {
         {/* ── Achievements / Stats card — BOTTOM RIGHT ──────────────────── */}
         <div
           className={`orv-panel-stats absolute z-20 ${fadeUp(560)}`}
-          style={{ right: '48px', bottom: '200px', ...delay(560) }}
+          style={{ right: '48px', bottom: 'clamp(64px, 9.5vh, 100px)', ...delay(560) }}
         >
           <div
             className="rounded-2xl overflow-hidden"

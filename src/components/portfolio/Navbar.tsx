@@ -207,26 +207,12 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div
-          className={`md:hidden backdrop-blur-xl border-b px-6 py-4 space-y-3 pointer-events-auto shadow-2xl transition-colors ${
+          className={`md:hidden backdrop-blur-xl border-b px-6 py-4 space-y-2 pointer-events-auto shadow-2xl transition-colors ${
             isDark
               ? 'bg-[#030303]/95 border-[#1a1a1a]'
               : 'bg-white/95 border-[#e5e7eb]'
           }`}
         >
-          <div
-            className={`flex items-center justify-between pb-3 border-b ${
-              isDark ? 'border-[#1a1a1a]' : 'border-[#e5e7eb]'
-            }`}
-          >
-            <span
-              className={`text-xs font-mono uppercase ${
-                isDark ? 'text-[#888888]' : 'text-[#6b7280]'
-              }`}
-            >
-              Theme
-            </span>
-            <ThemeToggle size="sm" />
-          </div>
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href.replace('#', '');
             return (

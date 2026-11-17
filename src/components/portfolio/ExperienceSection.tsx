@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { EXPERIENCES, CONTACT_INFO, ExperienceItem } from '@/data/portfolioData';
 import InterferenceRibbons from '@/components/ui/InterferenceRibbons';
+import Magnet from '@/components/ui/Magnet';
 
 const AUTO_PLAY_INTERVAL = 6000; // 6 seconds per role
 
@@ -149,28 +150,86 @@ export default function ExperienceSection() {
 
       <div className="relative z-10 space-y-10 sm:space-y-12">
         {/* ── Section Header ── */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 max-w-4xl">
-          <div className="space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 w-full">
+          <div className="space-y-3 max-w-xl">
             <span className="text-xs font-mono text-[#777777] uppercase tracking-wider block">
               03 &bull; Career
             </span>
             <h2 className="font-serif font-normal text-3xl sm:text-4xl md:text-5xl text-[#ffffff] tracking-tight">
               Where I&apos;ve <span className="italic">Worked.</span>
             </h2>
-            <p className="text-xs sm:text-sm text-[#9a9a9a] font-normal leading-relaxed max-w-xl">
+            <p className="text-xs sm:text-sm text-[#9a9a9a] font-normal leading-relaxed">
               Professional history building web platforms, clinical AI systems, and collaborating with cross-functional teams.
             </p>
           </div>
 
-          <a
-            href={CONTACT_INFO.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-black/15 text-xs font-medium text-[#0c0d0e] hover:border-black/40 shadow-sm dark:bg-[#0a0a0a] dark:border-[#1a1a1a] dark:text-[#ffffff] dark:hover:border-[#ffffff]/40 dark:shadow-none transition-colors self-start sm:self-auto active:scale-[0.98]"
-          >
-            <span>Download Resume</span>
-            <span className="text-[#595959] dark:text-[#aaadb0] text-sm">↓</span>
-          </a>
+          <div className="self-start sm:self-auto shrink-0">
+            <Magnet padding={60} magnetStrength={0.24}>
+              <a
+                href={CONTACT_INFO.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center gap-3 p-[1px] rounded-2xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 active:scale-[0.98]"
+                aria-label="Download Amrit Chand's Resume"
+              >
+                {/* Ambient glowing aura that illuminates on hover */}
+                <span
+                  aria-hidden="true"
+                  className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-emerald-500/15 via-sky-500/20 to-indigo-500/15 dark:from-emerald-500/30 dark:via-sky-500/30 dark:to-indigo-500/30 opacity-40 dark:opacity-60 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500"
+                />
+
+                {/* Border highlight beam */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-r from-black/10 via-black/25 to-black/10 dark:from-white/20 dark:via-white/60 dark:to-white/20 group-hover:from-emerald-500 group-hover:via-sky-500 group-hover:to-indigo-500 dark:group-hover:from-emerald-400 dark:group-hover:via-sky-400 dark:group-hover:to-indigo-400 transition-all duration-500"
+                />
+
+                {/* Glassmorphic inner core - Light & Dark responsive */}
+                <span className="relative z-10 flex items-center gap-3.5 px-5 py-3 rounded-[15px] bg-white/95 dark:bg-[#08090d]/95 backdrop-blur-xl border border-black/10 dark:border-white/10 group-hover:border-transparent transition-all duration-300 shadow-md shadow-black/5 dark:shadow-xl dark:shadow-black/50">
+                  {/* Live status pulsing dot */}
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+
+                  {/* Title & subtitle */}
+                  <span className="flex flex-col text-left">
+                    <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#0c0d0e] dark:text-white transition-colors">
+                      Download Resume
+                    </span>
+                    <span className="text-[10px] font-mono text-[#6b7280] dark:text-[#8a8f98] group-hover:text-[#374151] dark:group-hover:text-[#ccd0d9] transition-colors">
+                      Updated CV &bull; 2026
+                    </span>
+                  </span>
+
+                  {/* Animated download icon box */}
+                  <span className="w-8 h-8 rounded-lg bg-neutral-100 group-hover:bg-[#0c0d0e] text-[#0c0d0e] group-hover:text-white dark:bg-white/[0.08] dark:group-hover:bg-white dark:text-white dark:group-hover:text-black flex items-center justify-center transition-all duration-200 shrink-0">
+                    <svg
+                      className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M8 2.5V10.5M8 10.5L5 7.5M8 10.5L11 7.5"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M3 13.5H13"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </a>
+            </Magnet>
+          </div>
         </div>
 
         {/* ── Interactive Split Showcase (Features 4 Style) ── */}

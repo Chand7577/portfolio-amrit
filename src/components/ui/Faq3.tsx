@@ -82,8 +82,14 @@ export default function Faq3({
       </div>
 
       {/* ── Category Tabs (React Bits Pro FAQ 3 style) ────────────────── */}
-      <div className="relative mb-8 pb-1 overflow-x-auto no-scrollbar">
-        <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#0a0a0a] border border-[#1a1a1a] w-max max-w-full">
+      <style>{`
+        .faq-tabs-scroll::-webkit-scrollbar { display: none; }
+      `}</style>
+      <div
+        className="faq-tabs-scroll relative mb-8 pb-1 overflow-x-auto"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-neutral-100 border border-neutral-200 dark:bg-[#0a0a0a] dark:border-[#1a1a1a] w-max max-w-full">
           {availableCategories.map((category) => {
             const isActive = activeCategory === category;
             const count =
@@ -97,23 +103,23 @@ export default function Faq3({
                 onClick={() => handleCategoryChange(category)}
                 className={`relative px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 flex items-center gap-2 shrink-0 select-none ${
                   isActive
-                    ? 'text-white'
-                    : 'text-[#888888] hover:text-[#cccccc] hover:bg-white/[0.03]'
+                    ? 'text-[#0c0d0e] dark:text-white'
+                    : 'text-[#6b7280] hover:text-[#0c0d0e] hover:bg-black/5 dark:text-[#888888] dark:hover:text-[#cccccc] dark:hover:bg-white/[0.03]'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="faq-active-tab"
-                    className="absolute inset-0 rounded-xl bg-[#1c1c1e] border border-white/[0.14] shadow-sm shadow-black/40"
+                    className="absolute inset-0 rounded-xl bg-white border border-black/10 shadow-sm dark:bg-[#1c1c1e] dark:border-white/[0.14] dark:shadow-black/40"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">{category}</span>
+                <span className="relative z-10 font-medium">{category}</span>
                 <span
                   className={`relative z-10 text-[10px] font-mono px-1.5 py-0.5 rounded-md transition-colors ${
                     isActive
-                      ? 'bg-white/20 text-white font-semibold'
-                      : 'bg-white/[0.05] text-[#666666]'
+                      ? 'bg-black/5 text-[#0c0d0e] dark:bg-white/20 dark:text-white font-semibold'
+                      : 'bg-black/[0.04] text-[#6b7280] dark:bg-white/[0.05] dark:text-[#666666]'
                   }`}
                 >
                   {count}
@@ -143,8 +149,8 @@ export default function Faq3({
               key={`${activeCategory}-${idx}`}
               className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                 isOpen
-                  ? 'bg-[#0c0c0d] border-white/[0.16] shadow-lg shadow-black/50'
-                  : 'bg-[#0a0a0a] border-[#1a1a1a] hover:border-white/[0.1]'
+                  ? 'bg-white border-black/15 shadow-md shadow-black/5 dark:bg-[#0c0c0d] dark:border-white/[0.16] dark:shadow-lg dark:shadow-black/50'
+                  : 'bg-white/70 border-black/10 hover:border-black/20 hover:bg-white dark:bg-[#0a0a0a] dark:border-[#1a1a1a] dark:hover:border-white/[0.1]'
               }`}
             >
               <button
@@ -156,7 +162,7 @@ export default function Faq3({
               >
                 <div className="flex items-center gap-3.5 pr-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/70 shrink-0" />
-                  <span className="text-sm sm:text-base font-medium text-white group-hover:text-white/90 transition-colors">
+                  <span className="text-sm sm:text-base font-medium text-[#0c0d0e] dark:text-white group-hover:text-black dark:group-hover:text-white/90 transition-colors">
                     {faq.question}
                   </span>
                 </div>
@@ -164,8 +170,8 @@ export default function Faq3({
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
                     isOpen
-                      ? 'bg-white/10 border-white/20 text-white rotate-45'
-                      : 'bg-white/[0.04] border-white/[0.08] text-[#777777] group-hover:text-white group-hover:border-white/20'
+                      ? 'bg-neutral-100 border-black/15 text-[#0c0d0e] dark:bg-white/10 dark:border-white/20 dark:text-white rotate-45'
+                      : 'bg-neutral-50 border-black/10 text-neutral-500 group-hover:text-[#0c0d0e] group-hover:border-black/20 dark:bg-white/[0.04] dark:border-white/[0.08] dark:text-[#777777] dark:group-hover:text-white dark:group-hover:border-white/20'
                   }`}
                   aria-hidden="true"
                 >
@@ -197,7 +203,7 @@ export default function Faq3({
                     transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#9a9a9a] leading-relaxed font-normal border-t border-white/[0.06]">
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#52525b] dark:text-[#9a9a9a] leading-relaxed font-normal border-t border-black/5 dark:border-white/[0.06]">
                       <p>{faq.answer}</p>
                     </div>
                   </motion.div>
@@ -210,18 +216,18 @@ export default function Faq3({
 
       {/* ── Direct Contact / Support Callout ───────────────────────────── */}
       {showContactCard && (
-        <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-[#0d0d0e] to-[#0a0a0a] border border-[#1a1a1a] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="mt-10 p-6 rounded-2xl bg-neutral-100 border border-neutral-200 dark:bg-gradient-to-r dark:from-[#0d0d0e] dark:to-[#0a0a0a] dark:border-[#1a1a1a] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm dark:shadow-none">
           <div className="space-y-1">
-            <h4 className="text-sm font-semibold text-white">
+            <h4 className="text-sm font-semibold text-[#0c0d0e] dark:text-white">
               Have a question that isn&apos;t covered here?
             </h4>
-            <p className="text-xs text-[#888888]">
+            <p className="text-xs text-[#52525b] dark:text-[#888888]">
               Feel free to reach out directly. I respond to inquiries within 24 hours.
             </p>
           </div>
           <a
             href="#contact"
-            className="px-5 py-2.5 rounded-xl bg-white text-black text-xs font-semibold hover:bg-neutral-200 transition-colors shrink-0 shadow-sm"
+            className="faq-contact-btn px-5 py-2.5 rounded-xl bg-[#0c0d0e] text-white hover:bg-neutral-800 dark:bg-white dark:text-[#030303] dark:hover:bg-neutral-200 text-xs font-semibold transition-colors shrink-0 shadow-sm"
           >
             Get in Touch &rarr;
           </a>

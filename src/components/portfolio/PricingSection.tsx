@@ -26,11 +26,11 @@ export default function PricingSection() {
             return (
               <div key={plan.title} data-theme="dark" className="dark-island w-full h-full">
                 <PixelCard
-                  variant={isFeatured ? 'blue' : 'default'}
-                  glowColor={isFeatured ? '#38bdf8' : '#94a3b8'}
+                  variant="default"
+                  glowColor={isFeatured ? '#10b981' : '#94a3b8'}
                   colors={
                     isFeatured
-                      ? ['#38bdf8', '#7dd3fc', '#e0f2fe']
+                      ? ['#ffffff', '#10b981', '#34d399']
                       : ['#ffffff', '#cbd5e1', '#64748b']
                   }
                   radius={16}
@@ -45,7 +45,7 @@ export default function PricingSection() {
                   introDelay={idx * 120}
                   className={`w-full h-full min-h-[440px] transition-all duration-300 ${
                     isFeatured
-                      ? 'shadow-[0_0_30px_rgba(56,189,248,0.12)] border border-sky-400/30'
+                      ? 'shadow-[0_0_30px_rgba(16,185,129,0.14)] border border-emerald-500/30'
                       : 'border border-white/10 hover:border-white/30'
                   }`}
                 >
@@ -65,7 +65,7 @@ export default function PricingSection() {
                         </div>
 
                         {isFeatured && (
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-semibold uppercase bg-sky-400/10 text-sky-400 border border-sky-400/20">
+                          <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-semibold uppercase bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">
                             Popular
                           </span>
                         )}
@@ -82,7 +82,7 @@ export default function PricingSection() {
                             key={fIdx}
                             className="flex items-start gap-2 text-xs text-[#cbd5e1] leading-normal"
                           >
-                            <span className={isFeatured ? 'text-sky-400 text-xs font-bold' : 'text-sky-300 text-xs font-bold'}>
+                            <span className="text-emerald-400 text-xs font-bold">
                               ✓
                             </span>
                             <span>{feat}</span>
@@ -95,9 +95,9 @@ export default function PricingSection() {
                     <div className="pt-6">
                       <a
                         href="#contact"
-                        className={`block w-full py-2.5 px-3 text-center rounded-lg text-xs font-semibold transition-all ${
+                        className={`block w-full py-2.5 px-3 text-center rounded-lg text-xs font-semibold transition-all active:scale-[0.98] ${
                           isFeatured
-                            ? 'bg-sky-400 text-[#030303] hover:bg-sky-300 font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]'
+                            ? 'bg-white text-[#030303] hover:bg-neutral-100 font-bold shadow-[0_0_20px_rgba(255,255,255,0.22)]'
                             : 'bg-white/10 text-white hover:bg-white hover:text-[#030303] border border-white/20 hover:border-white font-semibold'
                         }`}
                       >

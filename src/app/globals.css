@@ -203,11 +203,11 @@ html.light .border-white\/10 {
 }
 
 /* Typography in Light Mode (High Contrast WCAG AA >= 4.5:1) */
-html.light .text-\[\#ffffff\]:not(.nav-talk-btn) {
+html.light .text-\[\#ffffff\]:not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
   color: #0c0d0e !important;
 }
 
-html.light .text-\[\#fdfdfd\]:not(.nav-talk-btn) {
+html.light .text-\[\#fdfdfd\]:not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
   color: #0c0d0e !important;
 }
 
@@ -223,7 +223,7 @@ html.light .text-\[\#777777\] {
   color: #595959 !important;
 }
 
-html.light .text-white:not(.nav-talk-btn) {
+html.light .text-white:not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
   color: #0c0d0e !important;
 }
 
@@ -277,13 +277,22 @@ html.light .orv-btn span {
   color: #ffffff !important;
 }
 
-html.light .nav-talk-btn {
+html.light .nav-talk-btn,
+html.light .faq-contact-btn,
+html.light .btn-preserve-white {
   background-color: #0c0d0e !important;
   color: #ffffff !important;
 }
 
-html.light .nav-talk-btn:hover {
+html.light .nav-talk-btn:hover,
+html.light .faq-contact-btn:hover,
+html.light .btn-preserve-white:hover {
   background-color: #262626 !important;
+  color: #ffffff !important;
+}
+
+html.light .faq-contact-btn *,
+html.light .btn-preserve-white * {
   color: #ffffff !important;
 }
 
