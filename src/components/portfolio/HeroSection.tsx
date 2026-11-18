@@ -53,14 +53,33 @@ export default function HeroSection() {
   }, [mounted]);
 
   // Scroll parallax on portrait
+  // Use Lenis's scroll position (not window.scrollY) so the parallax stays
+  // in sync with the smooth-scroll position and doesn't jerk at section edges.
   useEffect(() => {
     const el = portraitRef.current;
     if (!el) return;
-    const onScroll = () => {
-      el.style.transform = `translateY(${window.scrollY * 0.14}px)`;
+
+    const applyParallax = ({ scroll }: { scroll: number }) => {
+      el.style.transform = `translateY(${scroll * 0.14}px)`;
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+
+    // Try to hook into Lenis; fall back to native scroll if Lenis isn't ready yet
+    const tryLenis = () => {
+      const lenis = (window as any).__lenis;
+      if (lenis) {
+        lenis.on('scroll', applyParallax);
+        return () => lenis.off('scroll', applyParallax);
+      }
+      // Lenis not ready — use native scroll as fallback (slight jitter acceptable)
+      const fallback = () => applyParallax({ scroll: window.scrollY });
+      window.addEventListener('scroll', fallback, { passive: true });
+      return () => window.removeEventListener('scroll', fallback);
+    };
+
+    // Lenis initialises asynchronously; give it one tick
+    const cleanup = { fn: () => {} };
+    const t = setTimeout(() => { cleanup.fn = tryLenis() ?? (() => {}); }, 100);
+    return () => { clearTimeout(t); cleanup.fn(); };
   }, []);
 
   const fadeUp = (delay: number, extra = '') =>

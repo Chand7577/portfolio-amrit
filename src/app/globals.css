@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
+/* ── Lenis smooth-scroll required styles ── */
+/* Without this, browser native scroll fights Lenis causing jerks at section edges */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,11 +33,15 @@
   html {
     background-color: #030303;
     color: #fdfdfd;
+    /* Prevent browser overscroll rubber-band competing with Lenis */
+    overscroll-behavior: none;
   }
 
   body {
     background-color: #030303;
     color: #aaadb0;
+    /* Prevent body from rubber-banding independently */
+    overscroll-behavior: none;
     font-family: Graphik, -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", "Plus Jakarta Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
