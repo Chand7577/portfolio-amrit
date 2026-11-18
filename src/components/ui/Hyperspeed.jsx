@@ -1011,10 +1011,14 @@ const Hyperspeed = ({
 
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
-    const visibility = new IntersectionObserver(entries => {
-      state.visible = entries.some(entry => entry.isIntersecting);
-      if (state.visible) wake();
-    });
+    // Pre-wake 800px ahead so all shaders and render targets compile before the user enters ContactSection
+    const visibility = new IntersectionObserver(
+      entries => {
+        state.visible = entries.some(entry => entry.isIntersecting);
+        if (state.visible) wake();
+      },
+      { rootMargin: '800px 0px' }
+    );
     visibility.observe(container);
     container.addEventListener('pointerdown', onDown);
     container.addEventListener('pointermove', onMove);
@@ -1023,7 +1027,26 @@ const Hyperspeed = ({
     window.addEventListener('pointerup', onUp);
     window.addEventListener('pointercancel', onUp);
     window.addEventListener('blur', onUp);
-    resize();
+
+    // Initial size setup and shader pre-compilation during idle
+    applyResize();
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => {
+          if (!alive) return;
+          try {
+            renderer.compile(scene, camera);
+          } catch (_) {}
+        });
+      } else {
+        setTimeout(() => {
+          if (!alive) return;
+          try {
+            renderer.compile(scene, camera);
+          } catch (_) {}
+        }, 150);
+      }
+    }
 
     return () => {
       alive = false;

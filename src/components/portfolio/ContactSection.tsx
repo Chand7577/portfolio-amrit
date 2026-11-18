@@ -225,7 +225,7 @@ export default function ContactSection() {
       className="dark-island relative py-20 sm:py-28 overflow-hidden rounded-3xl border border-[#1a1a1a] bg-[#030303] my-8 sm:my-12 px-6 sm:px-10 lg:px-14 shadow-2xl text-white"
     >
       {/* ── Interactive 3D Hyperspeed Highway Backdrop ── */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <Hyperspeed
           curve="winding"
           curvature={0.9}

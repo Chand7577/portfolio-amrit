@@ -113,43 +113,41 @@ export default function ShatterText({
 
     tlRef.current?.kill();
 
-    // Reset letters to broken / scattered positions
+    // Reset letters to broken / scattered positions (transform and opacity only — no costly filter: blur)
     gsap.set(letters, {
       opacity: 0,
-      y: () => gsap.utils.random(-120, -40),
-      x: () => gsap.utils.random(-80, 80),
-      rotation: () => gsap.utils.random(-45, 45),
-      scale: () => gsap.utils.random(0.3, 0.7),
-      filter: 'blur(8px)',
+      y: () => gsap.utils.random(-100, -30),
+      x: () => gsap.utils.random(-60, 60),
+      rotation: () => gsap.utils.random(-35, 35),
+      scale: () => gsap.utils.random(0.4, 0.7),
     });
 
     const tl = gsap.timeline({ delay });
 
-    // Phase 1: Shattered fragments assemble into place
+    // Phase 1: Shattered fragments assemble into place smoothly via GPU composited transforms
     tl.to(letters, {
       opacity: 1,
       y: 0,
       x: 0,
       rotation: 0,
       scale: 1,
-      filter: 'blur(0px)',
-      duration: 1.1,
-      stagger: { each: 0.08, from: 'random' },
-      ease: 'back.out(1.5)',
+      duration: 1.0,
+      stagger: { each: 0.07, from: 'random' },
+      ease: 'back.out(1.4)',
     });
 
     // Phase 2: Micro settle bounce
     tl.to(
       letters,
       {
-        y: () => gsap.utils.random(-3, 3),
-        duration: 0.3,
-        stagger: { each: 0.04, from: 'random' },
+        y: () => gsap.utils.random(-2, 2),
+        duration: 0.25,
+        stagger: { each: 0.03, from: 'random' },
         ease: 'sine.inOut',
         yoyo: true,
         repeat: 1,
       },
-      '-=0.2'
+      '-=0.15'
     );
 
     tlRef.current = tl;
@@ -161,23 +159,22 @@ export default function ShatterText({
 
     if (prefersReduced) {
       const letters = el.querySelectorAll<HTMLSpanElement>('[data-letter]');
-      gsap.set(letters, { opacity: 1, y: 0, x: 0, rotation: 0, scale: 1, filter: 'blur(0px)' });
+      gsap.set(letters, { opacity: 1, y: 0, x: 0, rotation: 0, scale: 1 });
       return;
     }
 
-    // Play once on load
-    playShatter();
-
-    // Replay whenever user scrolls into the footer
+    // Play once when user actually scrolls the footer into view
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
+        for (const e of entries) {
           if (e.isIntersecting) {
             playShatter();
+            observer.disconnect(); // Only play once to avoid scroll jerks!
+            break;
           }
-        });
+        }
       },
-      { threshold: 0.05 } // Triggers as soon as top 5% of the element enters
+      { threshold: 0.15 }
     );
 
     observer.observe(el);
