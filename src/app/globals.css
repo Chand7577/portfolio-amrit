@@ -186,12 +186,12 @@ html.light body {
   color: #374151;
 }
 
-html.light h1,
-html.light h2,
-html.light h3,
-html.light h4,
-html.light h5,
-html.light h6 {
+html.light h1:not(.dark-island *):not([data-theme='dark'] *),
+html.light h2:not(.dark-island *):not([data-theme='dark'] *),
+html.light h3:not(.dark-island *):not([data-theme='dark'] *),
+html.light h4:not(.dark-island *):not([data-theme='dark'] *),
+html.light h5:not(.dark-island *):not([data-theme='dark'] *),
+html.light h6:not(.dark-island *):not([data-theme='dark'] *) {
   color: #0c0d0e;
 }
 
@@ -200,59 +200,59 @@ html.light ::selection {
   color: #ffffff;
 }
 
-/* Background overrides in Light Mode */
-html.light .bg-\[\#030303\] {
+/* Background overrides in Light Mode (only outside dark islands) */
+html.light .bg-\[\#030303\]:not(.dark-island):not(.dark-island *):not([data-theme='dark']):not([data-theme='dark'] *) {
   background-color: #f7f8fa !important;
 }
 
-html.light .bg-\[\#0a0a0a\] {
+html.light .bg-\[\#0a0a0a\]:not(.dark-island):not(.dark-island *):not([data-theme='dark']):not([data-theme='dark'] *) {
   background-color: #ffffff !important;
 }
 
-html.light .bg-\[\#0c0c0d\] {
+html.light .bg-\[\#0c0c0d\]:not(.dark-island):not(.dark-island *):not([data-theme='dark']):not([data-theme='dark'] *) {
   background-color: #ffffff !important;
 }
 
-html.light .bg-\[\#060606\]\/80,
-html.light .bg-\[\#060606\]\/85 {
+html.light .bg-\[\#060606\]\/80:not(.dark-island):not(.dark-island *):not([data-theme='dark']):not([data-theme='dark'] *),
+html.light .bg-\[\#060606\]\/85:not(.dark-island):not(.dark-island *):not([data-theme='dark']):not([data-theme='dark'] *) {
   background-color: rgba(255, 255, 255, 0.88) !important;
 }
 
 /* Borders */
-html.light .border-\[\#1a1a1a\] {
+html.light .border-\[\#1a1a1a\]:not(.dark-island):not(.dark-island *):not([data-theme='dark']):not([data-theme='dark'] *) {
   border-color: #e5e7eb !important;
 }
 
-html.light .border-white\/10 {
+html.light .border-white\/10:not(.dark-island):not(.dark-island *):not([data-theme='dark']):not([data-theme='dark'] *) {
   border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Typography in Light Mode (High Contrast WCAG AA >= 4.5:1) */
-html.light .text-\[\#ffffff\]:not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
+/* Typography in Light Mode (High Contrast WCAG AA >= 4.5:1) — ONLY OUTSIDE dark islands */
+html.light .text-\[\#ffffff\]:not(.dark-island *):not([data-theme='dark'] *):not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
   color: #0c0d0e !important;
 }
 
-html.light .text-\[\#fdfdfd\]:not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
+html.light .text-\[\#fdfdfd\]:not(.dark-island *):not([data-theme='dark'] *):not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
   color: #0c0d0e !important;
 }
 
-html.light .text-\[\#aaadb0\] {
+html.light .text-\[\#aaadb0\]:not(.dark-island *):not([data-theme='dark'] *) {
   color: #4b5563 !important;
 }
 
-html.light .text-\[\#9a9a9a\] {
+html.light .text-\[\#9a9a9a\]:not(.dark-island *):not([data-theme='dark'] *) {
   color: #52525b !important;
 }
 
-html.light .text-\[\#777777\] {
+html.light .text-\[\#777777\]:not(.dark-island *):not([data-theme='dark'] *) {
   color: #595959 !important;
 }
 
-html.light .text-white:not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
+html.light .text-white:not(.dark-island *):not([data-theme='dark'] *):not(.nav-talk-btn):not(.faq-contact-btn):not(.btn-preserve-white) {
   color: #0c0d0e !important;
 }
 
-html.light .text-white\/\[0\.24\] {
+html.light .text-white\/\[0\.24\]:not(.dark-island *):not([data-theme='dark'] *) {
   color: rgba(0, 0, 0, 0.16) !important;
 }
 
@@ -337,20 +337,13 @@ html.light .btn-preserve-white * {
 }
 
 html.light .dark-island,
-html.light [data-theme='dark'] {
+html.light [data-theme='dark'],
+html.light .dark-island *,
+html.light [data-theme='dark'] * {
   color-scheme: dark;
 }
 
-/* Prevent global light typography from inverting text inside dark islands */
-html.light .dark-island .text-white,
-html.light .dark-island .text-\[\#ffffff\],
-html.light .dark-island .text-\[\#fdfdfd\],
-html.light [data-theme='dark'] .text-white,
-html.light [data-theme='dark'] .text-\[\#ffffff\],
-html.light [data-theme='dark'] .text-\[\#fdfdfd\] {
-  color: #ffffff !important;
-}
-
+/* GUARANTEE crisp white and light text inside dark islands */
 html.light .dark-island h1,
 html.light .dark-island h2,
 html.light .dark-island h3,
@@ -362,8 +355,27 @@ html.light [data-theme='dark'] h2,
 html.light [data-theme='dark'] h3,
 html.light [data-theme='dark'] h4,
 html.light [data-theme='dark'] h5,
-html.light [data-theme='dark'] h6 {
+html.light [data-theme='dark'] h6,
+html.light .dark-island .text-white,
+html.light .dark-island .text-\[\#ffffff\],
+html.light .dark-island .text-\[\#fdfdfd\],
+html.light [data-theme='dark'] .text-white,
+html.light [data-theme='dark'] .text-\[\#ffffff\],
+html.light [data-theme='dark'] .text-\[\#fdfdfd\],
+html.light .dark-island input,
+html.light .dark-island textarea,
+html.light .dark-island select,
+html.light [data-theme='dark'] input,
+html.light [data-theme='dark'] textarea,
+html.light [data-theme='dark'] select {
   color: #ffffff !important;
+}
+
+html.light .dark-island input::placeholder,
+html.light .dark-island textarea::placeholder,
+html.light [data-theme='dark'] input::placeholder,
+html.light [data-theme='dark'] textarea::placeholder {
+  color: #666666 !important;
 }
 
 html.light .dark-island .text-\[\#aaadb0\],
@@ -386,14 +398,30 @@ html.light [data-theme='dark'] .text-\[\#555555\] {
   color: #71717a !important;
 }
 
+html.light .dark-island .text-\[\#cbd5e1\],
+html.light [data-theme='dark'] .text-\[\#cbd5e1\] {
+  color: #cbd5e1 !important;
+}
+
+html.light .dark-island .text-\[\#8b929a\],
+html.light [data-theme='dark'] .text-\[\#8b929a\] {
+  color: #8b929a !important;
+}
+
 /* Prevent backgrounds inside dark islands from turning white */
+html.light .dark-island,
+html.light [data-theme='dark'],
+html.light .dark-island.bg-\[\#030303\],
+html.light [data-theme='dark'].bg-\[\#030303\],
 html.light .dark-island .bg-\[\#030303\],
 html.light [data-theme='dark'] .bg-\[\#030303\] {
   background-color: #030303 !important;
 }
 
 html.light .dark-island .bg-\[\#0a0a0a\],
-html.light [data-theme='dark'] .bg-\[\#0a0a0a\] {
+html.light [data-theme='dark'] .bg-\[\#0a0a0a\],
+html.light .dark-island.bg-\[\#0a0a0a\],
+html.light [data-theme='dark'].bg-\[\#0a0a0a\] {
   background-color: #0a0a0a !important;
 }
 
@@ -413,12 +441,24 @@ html.light [data-theme='dark'] .bg-\[\#060606\]\/85 {
 }
 
 html.light .dark-island .border-\[\#1a1a1a\],
-html.light [data-theme='dark'] .border-\[\#1a1a1a\] {
+html.light [data-theme='dark'] .border-\[\#1a1a1a\],
+html.light .dark-island.border-\[\#1a1a1a\],
+html.light [data-theme='dark'].border-\[\#1a1a1a\] {
   border-color: #1a1a1a !important;
 }
 
 html.light .dark-island .border-white\/10,
-html.light [data-theme='dark'] .border-white\/10 {
+html.light [data-theme='dark'] .border-white\/10,
+html.light .dark-island.border-white\/10,
+html.light [data-theme='dark'].border-white\/10 {
   border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Hover buttons inside dark islands (e.g. Enquire Now hover) */
+html.light .dark-island a:hover.hover\:text-\[\#030303\],
+html.light [data-theme='dark'] a:hover.hover\:text-\[\#030303\],
+html.light .dark-island button:hover.hover\:text-\[\#030303\],
+html.light [data-theme='dark'] button:hover.hover\:text-\[\#030303\] {
+  color: #030303 !important;
 }
 
